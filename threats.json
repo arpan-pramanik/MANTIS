@@ -1,0 +1,565 @@
+[
+  {
+    "timestamp": "2025-07-15T19:47:29",
+    "blocked_ips": [
+      "::1"
+    ],
+    "blocked_tokens": [],
+    "details": [
+      {
+        "ip": "::1",
+        "token": "",
+        "rate": 200,
+        "unique_endpoints": 7,
+        "unique_tokens": 9,
+        "post_count": 150,
+        "entropy_tokens": 3.123661248229791,
+        "user_agent_score": 0.71
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-07-15T19:49:21",
+    "blocked_ips": [],
+    "blocked_tokens": [
+      "nullToken"
+    ],
+    "details": []
+  },
+  {
+    "timestamp": "2025-07-15T19:51:37",
+    "blocked_ips": [],
+    "blocked_tokens": [
+      "tokenC"
+    ],
+    "details": []
+  },
+  {
+    "timestamp": "2025-07-15T19:54:57",
+    "blocked_ips": [
+      "192.168.1.105",
+      "192.168.1.184",
+      "192.168.1.101",
+      "192.168.1.112",
+      "192.168.1.183",
+      "192.168.1.199",
+      "192.168.1.137",
+      "192.168.1.198",
+      "192.168.1.107",
+      "192.168.1.180",
+      "192.168.1.138",
+      "192.168.1.157",
+      "192.168.1.197",
+      "192.168.1.140",
+      "192.168.1.193",
+      "192.168.1.136",
+      "192.168.1.145",
+      "192.168.1.153",
+      "192.168.1.122",
+      "192.168.1.144",
+      "192.168.1.177",
+      "192.168.1.115",
+      "192.168.1.188",
+      "192.168.1.120",
+      "192.168.1.110",
+      "192.168.1.165",
+      "192.168.1.114",
+      "192.168.1.149",
+      "192.168.1.127",
+      "192.168.1.123",
+      "192.168.1.128",
+      "192.168.1.164",
+      "192.168.1.187",
+      "192.168.1.130",
+      "192.168.1.172",
+      "192.168.1.108",
+      "192.168.1.152",
+      "192.168.1.169",
+      "192.168.1.156",
+      "192.168.1.162",
+      "192.168.1.100",
+      "192.168.1.154",
+      "192.168.1.139",
+      "192.168.1.146",
+      "192.168.1.163",
+      "192.168.1.173",
+      "192.168.1.143"
+    ],
+    "blocked_tokens": [
+      "V6PzmhxmjNlspRz2",
+      "botToken"
+    ],
+    "details": [
+      {
+        "ip": "192.168.1.100",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.101",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.105",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.107",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.108",
+        "token": "botToken",
+        "rate": 4,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 2,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.110",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.112",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.114",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.115",
+        "token": "botToken",
+        "rate": 4,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 2,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.120",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.122",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.123",
+        "token": "botToken",
+        "rate": 10,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 5,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.127",
+        "token": "botToken",
+        "rate": 8,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 4,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.128",
+        "token": "botToken",
+        "rate": 4,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 2,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.130",
+        "token": "botToken",
+        "rate": 8,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 4,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.136",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.137",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.138",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.139",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.140",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.143",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.144",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.145",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.146",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.149",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.152",
+        "token": "botToken",
+        "rate": 6,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 3,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.153",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.154",
+        "token": "botToken",
+        "rate": 4,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 2,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.156",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.157",
+        "token": "botToken",
+        "rate": 4,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 2,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.162",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.163",
+        "token": "botToken",
+        "rate": 4,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 2,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.164",
+        "token": "botToken",
+        "rate": 4,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 2,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.165",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.169",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.172",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.173",
+        "token": "botToken",
+        "rate": 4,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 2,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.177",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.180",
+        "token": "botToken",
+        "rate": 4,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 2,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.183",
+        "token": "botToken",
+        "rate": 4,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 2,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.184",
+        "token": "botToken",
+        "rate": 4,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 2,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.187",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.188",
+        "token": "botToken",
+        "rate": 4,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 2,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.193",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.197",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.198",
+        "token": "botToken",
+        "rate": 4,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 2,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      },
+      {
+        "ip": "192.168.1.199",
+        "token": "botToken",
+        "rate": 2,
+        "unique_endpoints": 2,
+        "unique_tokens": 1,
+        "post_count": 1,
+        "entropy_tokens": -0.0,
+        "user_agent_score": 1.0
+      }
+    ]
+  }
+]
