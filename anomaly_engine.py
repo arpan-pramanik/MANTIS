@@ -9,7 +9,7 @@ import threading
 DB_FILE = 'storage.db'
 BLOCKLIST_FILE = 'blocklist.json'
 THREAT_LOG_FILE = 'threats.json'
-SCAN_INTERVAL = 10  # seconds
+SCAN_INTERVAL = 0.01  # seconds
 
 # Feature extraction from logs
 FEATURES = [

@@ -3,6 +3,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const rateLimit = require('express-rate-limit');
 const app = express();
+app.set('trust proxy', ['127.0.0.1', '::1']); // Only trust localhost proxies for security
 const PORT = 3000;
 
 const DB_FILE = path.join(__dirname, 'storage.db');
