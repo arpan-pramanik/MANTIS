@@ -4,13 +4,13 @@ import Footer from "../components/Footer";
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-brand-dark overflow-x-hidden selection:bg-brand-orange selection:text-white pt-32 pb-24">
+    <main className="min-h-screen flex flex-col bg-brand-dark overflow-x-hidden selection:bg-brand-orange selection:text-white pt-32">
       <CustomCursor />
       <Header />
-      <div className="max-w-3xl mx-auto px-6 text-brand-light">
+      <div className="flex-1 max-w-3xl w-full mx-auto px-6 text-brand-light">
         <h1 className="text-4xl font-serif mb-8">Privacy <span className="italic text-brand-orange">Policy</span></h1>
         
-        <div className="space-y-8 font-mono text-sm text-brand-light/70 leading-relaxed">
+        <div className="space-y-8 font-mono text-sm text-brand-light/70 leading-relaxed pb-24">
           <section>
             <h2 className="text-xl text-white font-serif mb-2">1. OPEN SOURCE TIERS</h2>
             <p>We do not collect telemetry, diagnostic data, or personal information from self-hosted manual deployments. You maintain complete sovereignty over your data.</p>
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
           </section>
         </div>
       </div>
-      <div className="mt-24">
+      <div className="mt-auto">
         <Footer />
       </div>
     </main>
