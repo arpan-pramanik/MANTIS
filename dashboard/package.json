@@ -1,5 +1,5 @@
 {
-  "name": "dashboard",
+  "name": "furo-clone",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@gsap/react": "^2.1.2",
     "@react-oauth/google": "^0.13.5",
     "gsap": "^3.15.0",
     "next": "16.2.7",
