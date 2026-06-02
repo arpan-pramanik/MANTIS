@@ -1,0 +1,31 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment
+.env
+.DS_Store
+
+# Logs & Metrics
+*.log
+engine.log
+server.log
+test_results.txt
+metrics_*.txt
+logs/
+
+# Database & Runtime States
+*.db
+*.sqlite
+storage.db
+blocklist.json
+threats.json
+repeat_results.json

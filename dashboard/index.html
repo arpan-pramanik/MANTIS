@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MANTIS — Threat Operations Center</title>
+  <meta name="description" content="Enterprise API Threat Detection & Response Dashboard">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="12" stroke="url(#logo-grad)" stroke-width="2" fill="none"/>
+            <circle cx="14" cy="14" r="6" stroke="url(#logo-grad)" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="14" r="2" fill="url(#logo-grad)"/>
+            <defs><linearGradient id="logo-grad" x1="0" y1="0" x2="28" y2="28">
+              <stop offset="0%" stop-color="#00ffaa"/><stop offset="100%" stop-color="#7c3aed"/>
+            </linearGradient></defs>
+          </svg>
+          <span class="logo-text">MANTIS</span>
+          <span class="logo-badge">Enterprise</span>
+        </div>
+      </div>
+      <div class="header-center">
+        <div class="status-indicator" id="status-indicator">
+          <div class="pulse"></div>
+          <span id="status-text">Connecting...</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <span class="clock" id="clock"></span>
+      </div>
+    </header>
+
+    <!-- Stats Grid -->
+    <section class="stats-grid">
+      <div class="stat-card" id="stat-threats">
+        <div class="stat-icon threat-icon">🚨</div>
+        <div class="stat-body">
+          <div class="stat-value" id="total-threats">—</div>
+          <div class="stat-label">Total Threats</div>
+        </div>
+      </div>
+      <div class="stat-card" id="stat-blocked">
+        <div class="stat-icon block-icon">🛡️</div>
+        <div class="stat-body">
+          <div class="stat-value" id="active-blocks">—</div>
+          <div class="stat-label">Active Blocks</div>
+        </div>
+      </div>
+      <div class="stat-card" id="stat-24h">
+        <div class="stat-icon recent-icon">⚡</div>
+        <div class="stat-body">
+          <div class="stat-value" id="threats-24h">—</div>
+          <div class="stat-label">Last 24h</div>
+        </div>
+      </div>
+      <div class="stat-card" id="stat-requests">
+        <div class="stat-icon req-icon">📊</div>
+        <div class="stat-body">
+          <div class="stat-value" id="total-requests">—</div>
+          <div class="stat-label">Requests Logged</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Charts Row -->
+    <section class="charts-row">
+      <div class="chart-card" id="severity-chart">
+        <h3 class="chart-title">Threat Severity Distribution</h3>
+        <div class="severity-bars" id="severity-bars"></div>
+      </div>
+      <div class="chart-card" id="timeline-chart">
+        <h3 class="chart-title">Threat Timeline (24h)</h3>
+        <div class="timeline" id="timeline"></div>
+      </div>
+      <div class="chart-card" id="type-chart">
+        <h3 class="chart-title">Attack Types</h3>
+        <div class="type-list" id="type-list"></div>
+      </div>
+    </section>
+
+    <!-- Threat Feed & Top Actors -->
+    <section class="bottom-row">
+      <div class="feed-card">
+        <h3 class="chart-title">
+          Live Threat Feed
+          <span class="feed-count" id="feed-count">0</span>
+        </h3>
+        <div class="threat-feed" id="threat-feed">
+          <div class="empty-state">Waiting for threats...</div>
+        </div>
+      </div>
+      <div class="actors-card">
+        <h3 class="chart-title">Top Threat Actors</h3>
+        <div class="actor-list" id="actor-list">
+          <div class="empty-state">No data</div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="dashboard.js"></script>
+</body>
+</html>

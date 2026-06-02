@@ -1,4 +1,11 @@
-requests
-pandas
-scikit-learn
-faker
+pandas>=2.2.0
+numpy>=1.26.0
+scikit-learn>=1.5.0
+scipy>=1.13.0
+requests>=2.32.0
+faker>=37.0.0
+redis>=5.0.0
+python-dotenv>=1.0.0
+pyyaml>=6.0
+pytest>=8.0.0
+pytest-cov>=5.0.0

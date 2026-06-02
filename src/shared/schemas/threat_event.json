@@ -1,0 +1,66 @@
+{
+  "type": "object",
+  "title": "MantisTheatEvent",
+  "description": "Standardized threat event schema used across all MANTIS components",
+  "properties": {
+    "eventId": { "type": "string", "format": "uuid" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "source": { "type": "string", "enum": ["ml_detector", "heuristic", "signature", "behavioral", "payload_analyzer", "rate_limiter"] },
+    "threatType": { "type": "string", "enum": [
+      "DDOS", "BRUTE_FORCE", "CREDENTIAL_STUFFING", "SQL_INJECTION", "XSS",
+      "PATH_TRAVERSAL", "COMMAND_INJECTION", "SSRF", "DATA_EXFILTRATION",
+      "RECONNAISSANCE", "BOTNET", "API_ABUSE", "ZERO_DAY", "EVASION",
+      "PAYLOAD_ANOMALY", "BEHAVIORAL_ANOMALY", "RATE_LIMIT_EXCEEDED"
+    ]},
+    "severity": { "type": "string", "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW", "INFO"] },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "mitreAttackId": { "type": "string" },
+    "actor": {
+      "type": "object",
+      "properties": {
+        "ip": { "type": "string" },
+        "token": { "type": "string" },
+        "userAgent": { "type": "string" },
+        "fingerprint": { "type": "string" }
+      }
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "method": { "type": "string" },
+        "path": { "type": "string" },
+        "headers": { "type": "object" },
+        "bodyHash": { "type": "string" },
+        "bodySize": { "type": "integer" }
+      }
+    },
+    "detection": {
+      "type": "object",
+      "properties": {
+        "matchedPatterns": { "type": "array", "items": { "type": "string" } },
+        "featureScores": { "type": "object" },
+        "mlScore": { "type": "number" },
+        "heuristicScore": { "type": "number" },
+        "ensembleScore": { "type": "number" }
+      }
+    },
+    "mitigation": {
+      "type": "object",
+      "properties": {
+        "action": { "type": "string", "enum": ["none", "warn", "throttle", "tempBlock", "permBlock", "quarantine"] },
+        "duration": { "type": "integer" },
+        "reason": { "type": "string" }
+      }
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "requestCount": { "type": "integer" },
+        "windowSeconds": { "type": "integer" },
+        "previousStrikes": { "type": "integer" },
+        "relatedEvents": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "required": ["eventId", "timestamp", "source", "threatType", "severity", "confidence", "actor"]
+}

@@ -1,98 +1,60 @@
-# MANTIS: API Sentinel
+# Mitigation of API-based Nuisances using Threat Intelligence System
 
-![Status](https://img.shields.io/badge/status-active-brightgreen)
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Python](https://img.shields.io/badge/python-3.13%2B-blue)
-![Node.js](https://img.shields.io/badge/node.js-18%2B-green)
+MANTIS is an extremely advanced, production-ready API security gateway and threat detection engine. Designed for top-tier security infrastructure, it provides multi-layered protection against complex API attacks through a combination of inline signature-based validation and asynchronous Machine Learning/Heuristic behavioral analysis.
 
----
+## Core Features
+* **Node.js API Gateway**: High-performance reverse proxy that validates payloads inline.
+* **Python Threat Engine**: Asynchronous engine utilizing ML and advanced heuristics for behavioral threat detection.
+* **Ensemble Voting Mitigation**: Warn, throttle, and block malicious entities dynamically using a multi-detector consensus model.
+* **Observability (Prometheus/Grafana)**: Fully instrumented metrics for real-time attack trend visualization.
+* **AWS Ready**: Dockerized and ready for scalable deployment on AWS ECS/EKS.
 
-## 🚨 Overview
-**MANTIS** is a free, self-hostable API runtime security tool for real-time threat detection and mitigation. It logs API traffic, detects anomalies (ML + heuristics), and blocks malicious users/IPs instantly.
+## Threat Coverage
+- SQL Injection (SQLi) (Advanced encodings, time-based, boolean-based)
+- Cross-Site Scripting (XSS)
+- Server-Side Request Forgery (SSRF)
+- Path Traversal & Command Injection
+- Automated Scanners & Reconnaissance
 
----
+## Quickstart
 
-## ✨ Features
-- **Real-time request logging** (IP, token, endpoint, user-agent, POST body)
-- **SQLite storage** for logs and blocklist
-- **Advanced anomaly detection** (Isolation Forest + Local Outlier Factor + heuristics)
-- **Automated blocking mechanism**
-- **Rate limiting**
-- **Health endpoint**
-- **Traffic simulators** (basic & advanced)
-- **Repeat nuance tester** for blocklist verification
+### 1. Requirements
+* Node.js v20+
+* Python 3.10+
+* Docker & Docker Compose (for Observability)
 
----
-
-## ⚡ Quickstart
-
-### 1. Install dependencies
+### 2. Setup
 ```bash
-npm install express sqlite3 express-rate-limit
+# Gateway Setup
+npm install
+
+# Engine Setup
+python -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Start API server
+### 3. Running MANTIS
 ```bash
-node api_server.js
+# Start the Gateway
+node src/server/server.js
+
+# Start the Detection Engine
+source venv/bin/activate
+python -m src.engine.main
 ```
 
-### 3. Simulate traffic
-- Basic:
-  ```bash
-  python simulate_traffic.py
-  ```
-- Advanced (infinite diversity):
-  ```bash
-  /home/arpan/Developments/MANTIS/venv/bin/python random_traffic_sim.py
-  ```
-
-### 4. Run anomaly detection
+### 4. Observability (Prometheus & Grafana)
 ```bash
-python anomaly_engine.py
+docker-compose up -d
 ```
+Access Grafana at `http://localhost:3002` (Login: admin / admin)
 
-### 5. View blocklist
+## Architecture
+MANTIS separates the latency-critical traffic proxying from the computationally heavy ML detection. The Node.js gateway handles inline blocking of deterministic threats, while the Python engine constantly polls behavioral logs to detect sophisticated, distributed attacks, applying dynamic blocklists instantly.
+
+## Testing
+MANTIS includes an enterprise-grade attack simulation suite containing 47 rigorous penetration tests.
 ```bash
-cat blocklist.json
+bash tests/integration/attack_simulation.sh
 ```
-
-### 6. Verify blocking (repeat blocked nuances)
-```bash
-/home/arpan/Developments/MANTIS/venv/bin/python repeat_nuaunces.py
-cat repeat_results.json
-```
-
----
-
-## 🏗️ Architecture
-```
-+-------------------+      +-------------------+      +-------------------+
-|   Traffic Sim(s)  +----->|   API Server      +----->|   SQLite DB       |
-+-------------------+      +-------------------+      +-------------------+
-         |                        |                          |
-         |                        v                          v
-         |                +-------------------+      +-------------------+
-         |                |  Anomaly Engine   |<-----+  Blocklist/Threats|
-         |                +-------------------+      +-------------------+
-         |                        |
-         v                        v
-+-------------------+      +-------------------+
-| Repeat Nuance Test|      |  Visualization    |
-+-------------------+      +-------------------+
-```
-- API server logs all requests to SQLite
-- Anomaly engine analyzes logs and updates blocklist
-- Blocked IPs/tokens are rejected by the API server
-- Traffic simulators generate diverse and evolving API traffic
-- Repeat nuance tester verifies blocklist effectiveness
-
----
-
-## 🧑‍💻 Author
-**Arpan Pramanik**
-
----
-
-## 📄 License
-MIT
