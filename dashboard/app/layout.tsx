@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display, DotGothic16 } from "next/font/google";
 import "./globals.css";
-import Providers from "./context/Providers";
 import Preloader from "./components/Preloader";
 
 const inter = Inter({
@@ -46,9 +45,7 @@ export default function RootLayout({
             </p>
           </div>
         </div>
-        <Providers>
-          {children}
-        </Providers>
+        {children}
       </body>
     </html>
   );

@@ -4,7 +4,7 @@ import ProblemSection from "./components/ProblemSection";
 import StatementSection from "./components/StatementSection";
 import Footer from "./components/Footer";
 import CustomCursor from "./components/CustomCursor";
-import PricingSection from "./components/PricingSection";
+import EnterpriseSection from "./components/EnterpriseSection";
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
       <Hero />
       <ProblemSection />
       <StatementSection />
-      <PricingSection />
+      <EnterpriseSection />
       <Footer />
     </main>
   );
