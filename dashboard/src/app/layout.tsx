@@ -1,26 +1,33 @@
-import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
-import './globals.css'
+import type { Metadata } from "next";
+import { Inter, Playfair_Display } from "next/font/google";
+import "./globals.css";
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
-const jbMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jb-mono' })
+const inter = Inter({ 
+  subsets: ["latin"], 
+  variable: "--font-inter" 
+});
+
+const playfair = Playfair_Display({ 
+  subsets: ["latin"], 
+  style: ['normal', 'italic'],
+  variable: "--font-playfair" 
+});
 
 export const metadata: Metadata = {
-  title: 'MANTIS | Enterprise API Protection',
-  description: 'Mitigation of API-based Nuisances using Threat Intelligence System',
-}
+  title: "MANTIS | Threat Intelligence System",
+  description: "Enterprise-grade API security gateway and threat detection engine.",
+};
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.variable} ${jbMono.variable} font-sans antialiased min-h-screen bg-[#0a0e1a] text-[#f0f4ff]`}>
-        <div className="noise-overlay"></div>
+    <html lang="en">
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-[#050505] text-white selection:bg-[#CCFF00] selection:text-black overflow-x-hidden`}>
         {children}
       </body>
     </html>
-  )
+  );
 }
