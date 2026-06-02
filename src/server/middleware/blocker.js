@@ -10,14 +10,14 @@ let allowCache = new Map();
 let lastCacheRefresh = 0;
 const CACHE_TTL = 30000; // 30 seconds
 
-function refreshCache() {
+async function refreshCache() {
   const now = Date.now();
   if (now - lastCacheRefresh < CACHE_TTL) return;
   blockCache.clear();
   allowCache.clear();
   lastCacheRefresh = now;
   // Expire old blocks on cache refresh
-  try { expireBlocks(); } catch (e) { /* db might not be ready */ }
+  try { await expireBlocks(); } catch (e) { /* db might not be ready */ }
 }
 
 /** Get the real client IP */
@@ -38,8 +38,8 @@ function ipMatchesCIDR(ip, cidr) {
 }
 
 /** Threat blocking middleware */
-function blocker(req, res, next) {
-  refreshCache();
+async function blocker(req, res, next) {
+  await refreshCache();
 
   const ip = getClientIp(req);
   const token = req.headers['x-api-token'] || '';
@@ -48,7 +48,7 @@ function blocker(req, res, next) {
   // Check allowlist first
   const allowKey = `${ip}:${token}`;
   if (!allowCache.has(allowKey)) {
-    const allowed = isAllowlisted(ip, token);
+    const allowed = await isAllowlisted(ip, token);
     allowCache.set(allowKey, !!allowed);
   }
   if (allowCache.get(allowKey)) return next();
@@ -77,7 +77,7 @@ function blocker(req, res, next) {
 
   // Database lookup
   try {
-    const blocked = isBlocked(ip, token);
+    const blocked = await isBlocked(ip, token);
     blockCache.set(blockKey, blocked || null);
 
     if (blocked) {

@@ -2,10 +2,9 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import ProblemSection from "./components/ProblemSection";
 import StatementSection from "./components/StatementSection";
-import SelectedWork from "./components/SelectedWork";
-import FeaturesSection from "./components/FeaturesSection";
 import Footer from "./components/Footer";
 import CustomCursor from "./components/CustomCursor";
+import PricingSection from "./components/PricingSection";
 
 export default function Home() {
   return (
@@ -15,8 +14,7 @@ export default function Home() {
       <Hero />
       <ProblemSection />
       <StatementSection />
-      <SelectedWork />
-      <FeaturesSection />
+      <PricingSection />
       <Footer />
     </main>
   );

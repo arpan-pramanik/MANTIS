@@ -26,8 +26,8 @@ export default function StatementSection() {
       <div ref={el => { plusRefs.current[3] = el }} className="absolute top-1/2 right-24 transform -translate-y-1/2 text-gray-400 font-mono">+</div>
       <div className="max-w-4xl mx-auto text-center z-10">
         <h2 ref={textRef} className="text-5xl md:text-6xl lg:text-7xl font-serif font-medium leading-[1.1] tracking-tight">
-          Your brand deserves a website<br />
-          that <span className="text-brand-orange italic font-serif">matches</span> the work behind it.
+          Your infrastructure deserves a gateway<br />
+          that <span className="text-brand-orange italic font-serif">matches</span> the scale behind it.
         </h2>
       </div>
     </section>

@@ -29,3 +29,4 @@ storage.db
 blocklist.json
 threats.json
 repeat_results.json
+ui up/

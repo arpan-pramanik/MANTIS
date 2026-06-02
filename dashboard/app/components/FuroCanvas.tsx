@@ -51,10 +51,7 @@ export default function FuroCanvas() {
     };
 
     const SVG_STRING = `<svg width="1320" height="368" viewBox="0 0 1320 368" xmlns="http://www.w3.org/2000/svg">
-<path d="M88.626 359.92H0V7.87785H261.939V80.2557H88.626V157.557H246.24V229.935H88.626V359.92Z" fill="#fff"/>
-<path d="M446.223 367.798C339.871 367.798 299.005 320.531 299.005 232.889V7.87785H387.631V232.889C387.631 278.679 407.326 295.42 446.223 295.42C485.12 295.42 504.814 278.679 504.814 232.889V7.87785H593.44V232.889C593.44 320.531 552.574 367.798 446.223 367.798Z" fill="#fff"/>
-<path d="M738.223 359.92H649.597V7.87785H815.524C893.811 7.87785 941.078 44.313 941.078 108.321C941.078 157.557 913.505 186.607 869.685 196.454V197.439C957.818 212.702 950.272 349.088 970.459 354.996V359.92H878.387C861.154 345.149 868.7 237.321 793.368 237.321H738.223V359.92ZM738.223 164.943H798.292C833.742 164.943 852.452 152.141 852.452 122.599C852.452 93.0572 833.742 80.2557 798.292 80.2557H738.223V164.943Z" fill="#fff"/>
-<path d="M1145.7 367.798C1033.94 367.798 971.405 290.004 971.405 183.653C971.405 77.7939 1033.94 0 1145.7 0C1256.48 0 1320 77.7939 1320 183.653C1320 290.004 1256.48 367.798 1145.7 367.798ZM1145.7 295.42C1209.71 295.42 1229.4 245.199 1229.4 183.653C1229.4 122.599 1209.71 72.3779 1145.7 72.3779C1081.2 72.3779 1062 122.599 1062 183.653C1062 245.199 1081.2 295.42 1145.7 295.42Z" fill="#fff"/>
+  <text x="-10" y="320" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="360" fill="#fff" text-anchor="start" letter-spacing="-5">MANTIS</text>
 </svg>`;
 
     let particles: any[] = [];
@@ -291,7 +288,13 @@ export default function FuroCanvas() {
             const y = digitDrawList[i + 1];
             const op = digitDrawList[i + 2];
             const ch = digitDrawList[i + 3];
-            ctx.fillStyle = `rgba(${CONFIG.particleColorRGB}, ${op})`;
+            if (ch === '1') {
+              ctx.fillStyle = `rgba(16, 185, 129, ${op})`; // green
+            } else if (ch === '0') {
+              ctx.fillStyle = `rgba(110, 231, 183, ${op})`; // lighter green
+            } else {
+              ctx.fillStyle = `rgba(${CONFIG.particleColorRGB}, ${op})`;
+            }
             ctx.fillText(ch, x, y);
           }
         }
@@ -387,10 +390,7 @@ export default function FuroCanvas() {
     <div ref={containerRef} className="furo-particles absolute top-0 left-8 right-8 aspect-[1320/368] pointer-events-none z-10 hidden md:block" style={{ width: '100%', maxWidth: '80vw' }}>
       <svg className="furo-static absolute top-0 left-0 w-full h-full opacity-10 transition-opacity duration-500 ease-out" viewBox="0 0 1320 368" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
         <g fill="rgba(242, 243, 238, 0.08)">
-          <path d="M88.626 359.92H0V7.87785H261.939V80.2557H88.626V157.557H246.24V229.935H88.626V359.92Z"/>
-          <path d="M446.223 367.798C339.871 367.798 299.005 320.531 299.005 232.889V7.87785H387.631V232.889C387.631 278.679 407.326 295.42 446.223 295.42C485.12 295.42 504.814 278.679 504.814 232.889V7.87785H593.44V232.889C593.44 320.531 552.574 367.798 446.223 367.798Z"/>
-          <path d="M738.223 359.92H649.597V7.87785H815.524C893.811 7.87785 941.078 44.313 941.078 108.321C941.078 157.557 913.505 186.607 869.685 196.454V197.439C957.818 212.702 950.272 349.088 970.459 354.996V359.92H878.387C861.154 345.149 868.7 237.321 793.368 237.321H738.223V359.92ZM738.223 164.943H798.292C833.742 164.943 852.452 152.141 852.452 122.599C852.452 93.0572 833.742 80.2557 798.292 80.2557H738.223V164.943Z"/>
-          <path d="M1145.7 367.798C1033.94 367.798 971.405 290.004 971.405 183.653C971.405 77.7939 1033.94 0 1145.7 0C1256.48 0 1320 77.7939 1320 183.653C1320 290.004 1256.48 367.798 1145.7 367.798ZM1145.7 295.42C1209.71 295.42 1229.4 245.199 1229.4 183.653C1229.4 122.599 1209.71 72.3779 1145.7 72.3779C1081.2 72.3779 1062 122.599 1062 183.653C1062 245.199 1081.2 295.42 1145.7 295.42Z"/>
+          <text x="-10" y="320" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="360" text-anchor="start" letter-spacing="-5">MANTIS</text>
         </g>
       </svg>
       <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full block"></canvas>

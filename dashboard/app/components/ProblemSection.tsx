@@ -25,14 +25,14 @@ export default function ProblemSection() {
       <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div className="relative">
           <h2 ref={headingRef} className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium leading-tight mb-16 z-10 relative">
-            Your business is in the top tier.<br />Your website isn't.
+            Your API powers your entire business.<br />Your infrastructure doesn't reflect it.
           </h2>
         </div>
         <div ref={textRef} className="space-y-8 text-[#888888] text-base md:text-lg max-w-md ml-auto">
-          <p>You've spent years building your expertise. Earning trust. Refining your craft.</p>
-          <p>But your website still looks like something you threw together between client calls. Every visitor notices it before you do.</p>
-          <p>You know it needs to change. But the business always comes first. And you haven't found anyone who truly gets what your brand is about.</p>
-          <p>So years of credibility get undone in a five-second impression. And you'll never know how many opportunities quietly walked away.</p>
+          <p>You've spent years building your endpoints. Writing business logic. Scaling your application.</p>
+          <p>But your API is exposed, unmonitored, and vulnerable to malicious traffic. Every attacker notices it before you do.</p>
+          <p>You know you need an API gateway. But shipping features always comes first. And you haven't found a solution that integrates seamlessly with your stack.</p>
+          <p>So years of engineering get undone by a single DDoS attack or data breach. And you'll never know how much malicious traffic quietly bypassed your system.</p>
         </div>
       </div>
     </section>

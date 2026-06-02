@@ -41,11 +41,9 @@ function requestLogger(req, res, next) {
       fingerprint: fingerprintReq(req)
     };
 
-    try {
-      insertLog(entry);
-    } catch (err) {
+    insertLog(entry).catch(err => {
       // Don't crash the server if logging fails
-    }
+    });
 
     // Update metrics
     const routePattern = req.route ? req.route.path : req.path;
