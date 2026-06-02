@@ -10,15 +10,14 @@ export default {
     extend: {
       colors: {
         mantis: {
-          dark: "#050505",
-          light: "#F2F3EE", // Furo's specific off-white
-          accent: "#CCFF00",
+          900: "#09090b", // Deep zinc background
+          800: "#18181b", // Card background
+          700: "#27272a", // Borders
+          primary: "#CCFF00", // Lime green accent
         }
       },
       fontFamily: {
-        sans: ['var(--font-inter-tight)', 'sans-serif'],
-        serif: ['var(--font-pt-serif)', 'serif'],
-        display: ['var(--font-instrument-serif)', 'serif'],
+        sans: ['var(--font-inter)', 'sans-serif'],
       },
     },
   },
