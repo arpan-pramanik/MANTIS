@@ -37,7 +37,7 @@ export default function EnterpriseSection() {
           <p className="text-brand-light/60 text-lg mb-8 max-w-lg leading-relaxed">
             Need a fully managed, serverless deployment with advanced threat intelligence, an admin dashboard, and automated AWS provisioning?
           </p>
-          <a href="mailto:developer@example.com?subject=MANTIS Enterprise Inquiry" className="inline-block py-4 px-8 border border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-black transition-colors font-bold tracking-widest uppercase text-sm">
+          <a href="mailto:arpanpramanikk@gmail.com?subject=MANTIS Enterprise Inquiry" className="inline-block py-4 px-8 border border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-black transition-colors font-bold tracking-widest uppercase text-sm">
             Contact Developer
           </a>
         </div>
