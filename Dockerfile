@@ -32,8 +32,6 @@ COPY --from=python-builder /app/src/engine ./src/engine
 # Copy shared schemas
 COPY src/shared/ src/shared/
 
-# Copy dashboard
-COPY dashboard/ dashboard/
 
 # Create directories
 RUN mkdir -p logs data
