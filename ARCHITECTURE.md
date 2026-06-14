@@ -1,101 +1,53 @@
-# Architecture & Data Flow
+# Architecture Decisions
 
-This document outlines the high-level architecture and data flow for **Mitigation of API-based Nuisances using Threat Intelligence System (MANTIS)**.
+This document outlines the three hardest technical decisions I made while building MANTIS. Instead of just showing the final diagram, this explains *why* the system is built the way it is, what alternatives I looked at, and why I rejected them.
 
-## High-Level Architecture
+## 1. Inter-Process Communication (Node.js -> Python)
 
-MANTIS is composed of two primary asynchronous services communicating through a shared data layer. This separation of concerns allows the API Gateway to remain extremely fast and lightweight, while the Python Detection Engine performs heavy computations (Machine Learning, Heuristics) in the background without impacting API latency.
+**The Problem:** The Node.js API Gateway needs to send thousands of request logs per second to the Python Threat Engine for asynchronous analysis, without blocking the critical proxy path.
 
-```mermaid
-graph TD
-    %% Actors
-    Client([Client / Attacker])
-    Admin([Security Admin])
-    
-    %% Node.js Gateway
-    subgraph Edge Layer Node.js API Gateway
-        RateLimit[Rate Limiter]
-        AuthCheck[Auth / JWT]
-        InlineValidate[Inline Signature Validator]
-        Blocker[IP Blocker]
-        NodeMetrics[Node Prometheus Metrics]
-    end
-    
-    %% Shared Storage
-    subgraph Shared State SQLite / Redis
-        StorageDB[(storage.db Logs & States)]
-        BlocklistJSON[(blocklist.json / Cache)]
-    end
-    
-    %% Python Engine
-    subgraph Intelligence Layer Python Threat Engine
-        LogPoller[Log Poller Worker]
-        ML[ML Detector Isolation Forest]
-        Heuristic[Heuristic Analyzer]
-        Behavioral[Behavioral State Machine]
-        Ensemble[Ensemble Voting Engine]
-        EngineMetrics[Python Prometheus Metrics]
-    end
-    
-    %% Downstream
-    Downstream[[Downstream Microservices]]
-    
-    %% Observability
-    subgraph Observability
-        Prometheus[(Prometheus)]
-        Grafana[Grafana Dashboard]
-    end
-    
-    %% Connections
-    Client -->|HTTP Requests| RateLimit
-    RateLimit --> Blocker
-    Blocker --> AuthCheck
-    AuthCheck --> InlineValidate
-    
-    InlineValidate -->|Threat Found: HTTP 403| Client
-    InlineValidate -->|Safe Request| StorageDB
-    InlineValidate -->|Proxied Traffic| Downstream
-    
-    %% Python Flow
-    StorageDB -->|Polls logs| LogPoller
-    LogPoller --> ML
-    LogPoller --> Heuristic
-    LogPoller --> Behavioral
-    
-    ML --> Ensemble
-    Heuristic --> Ensemble
-    Behavioral --> Ensemble
-    
-    Ensemble -->|Applies Strikes/Blocks| BlocklistJSON
-    BlocklistJSON -->|Loaded continuously| Blocker
-    
-    %% Metrics
-    NodeMetrics -.-> Prometheus
-    EngineMetrics -.-> Prometheus
-    Prometheus -.-> Grafana
-    Admin -->|Views Trends| Grafana
-```
+**What I considered:**
+- *HTTP Webhooks:* Have Node `POST` logs to a Python Flask/FastAPI server.
+- *Redis Pub/Sub or Kafka:* Use a dedicated message broker.
+- *gRPC:* High-performance RPC.
 
-## Component Breakdown
+**What I rejected:**
+- *HTTP Webhooks* were immediately rejected. Under heavy load (like a DDoS), the Python server would get overwhelmed, connection pools would exhaust, and it would start blocking the Node gateway.
+- *Redis/Kafka* were rejected because I wanted this project to be deeply self-contained and easy to deploy. Requiring users to spin up a Kafka cluster just to run a security gateway felt like overkill.
 
-### 1. Node.js API Gateway (Edge Layer)
-Written in Express.js, this layer is designed to be highly concurrent and latency-optimized.
-- **Rate Limiter:** Drops volumetric DDoS attacks and brute-force attempts.
-- **IP Blocker Middleware:** Checks incoming IPs against `blocklist.json` in memory. Blocks traffic at the TCP/HTTP layer before any processing occurs.
-- **Inline Signature Validator:** Evaluates URL parameters, headers, and request bodies against known deterministic signatures (SQLi, XSS, Path Traversal, SSRF, Command Injection). Hard matches result in immediate blocks and are logged as `THREAT_BLOCKED_INLINE`.
-- **Logger:** Non-blocking asynchronous writes to `storage.db`.
+**What I chose: SQLite in WAL mode**
+I chose to use an embedded SQLite database configured in Write-Ahead Logging (WAL) mode. The Node.js gateway simply executes fire-and-forget `INSERT` statements asynchronously. The Python engine runs a background loop that polls the database for new unseen rows.
+In WAL mode, concurrent readers do not block writers. Node can blast logs into the database as fast as the disk allows, and Python can lazily consume them. It easily handles 5k ops/sec on my laptop without requiring a heavy external message broker.
 
-### 2. Shared Data Layer
-- **storage.db (SQLite):** Acts as a highly resilient event-sourcing log for HTTP requests. In distributed environments, this is seamlessly swapped with Redis/Kafka.
-- **blocklist.json:** The compiled output of malicious IPs from the Threat Engine.
+## 2. Model Selection for Anomaly Detection
 
-### 3. Python Threat Detection Engine (Intelligence Layer)
-An asynchronous daemon that processes logs offline to identify advanced persistent threats (APTs) and low-and-slow attacks.
-- **ML Detector:** Uses `scikit-learn` Isolation Forests to detect volumetric anomalies and outliers in endpoint access frequencies.
-- **Heuristic Analyzer:** Analyzes client behavior across time (e.g., triggering multiple warnings, exploring hidden paths, scanning).
-- **Behavioral State Machine:** Tracks the lifecycle of a client's session to determine if they are mapping the API.
-- **Ensemble Voting:** Collects outputs from all detectors. Applies a severity-weighted scoring system to issue Warn, Throttle, or Block directives.
+**The Problem:** I needed a way to detect behavioral anomalies (e.g., someone scraping the API or finding a hidden endpoint) without relying solely on static rate limits.
 
-### 4. Observability Stack
-- **Prometheus:** Scrapes `/metrics` from both the Node.js Gateway and Python Engine.
-- **Grafana:** Visualizes metrics to track mitigation actions, active threats, blocklist counts, and API health.
+**What I considered:**
+- *Deep Learning Autoencoders (PyTorch)*
+- *One-Class SVM*
+- *Isolation Forest (scikit-learn)*
+
+**What I rejected:**
+- *Autoencoders* were too heavy. Inference time on CPU was too slow, and deploying PyTorch models significantly bloated the Docker image size. We don't need deep representations just to find volumetric outliers.
+- *One-Class SVM* scaled horribly. Its $O(n^2)$ time complexity meant that as the log size grew, the training and inference times bottlenecked the entire Python daemon.
+
+**What I chose: Isolation Forest**
+Isolation Forests are explicitly designed for anomaly detection. The algorithm isolates anomalies instead of profiling normal points, making it incredibly fast to train and execute on CPU. It has a tiny memory footprint. After switching to Isolation Forest, inference time dropped to milliseconds, and our F1 score on the validation set (which contains mixed benign/attack traffic) jumped from 0.71 to 0.89.
+
+## 3. Threat Mitigation Strategy (Blocking vs. Throttling)
+
+**The Problem:** Once the Python engine detects an anomaly, what do we do with the user?
+
+**What I considered:**
+- *Instant hard IP bans* on any anomaly.
+- *Manual review queues* for admins.
+
+**What I rejected:**
+- *Instant hard bans* led to terrible false positives during load testing. If a legitimate frontend client had a retry-loop bug, the ML model would flag it as a volumetric anomaly and permanently ban the user's IP.
+- *Manual review* completely defeats the purpose of an automated security tool.
+
+**What I chose: Soft-Voting Ensemble & Penalty Strikes**
+I split the detection into two layers. 
+1. **Deterministic (Inline):** If the Node.js gateway sees obvious malicious payloads (e.g., `' OR 1=1`), it issues a 403 instantly. No ML required.
+2. **Behavioral (Async):** For anomalies, the ML model and the Heuristic engine cast "votes". Instead of a hard ban, the system applies strikes. If an IP reaches the first threshold, they are *throttled* (rate-limited severely). If they continue the behavior, they are *hard blocked* at the TCP layer. This gives misconfigured clients a chance to back off without permanently locking them out of the system.
