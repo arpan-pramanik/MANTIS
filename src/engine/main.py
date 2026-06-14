@@ -79,7 +79,7 @@ def scan_cycle():
 
     if threats:
         logger.warning(
-            f"🚨 Detected {len(threats)} threats, blocked {blocked_count} "
+            f"Detected {len(threats)} threats, blocked {blocked_count} "
             f"({entity_count} entities analyzed in {duration:.2f}s)"
         )
         for t in threats[:5]:

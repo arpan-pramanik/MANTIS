@@ -9,9 +9,9 @@ const DEDUP_WINDOW = 300000; // 5 minutes
 /** Format alert message */
 function formatAlert(event) {
   const severity = event.severity || 'UNKNOWN';
-  const emoji = { CRITICAL: '🚨', HIGH: '🔴', MEDIUM: '🟡', LOW: '🟢' }[severity] || '⚪';
+  const prefix = { CRITICAL: '[CRITICAL]', HIGH: '[HIGH]', MEDIUM: '[MEDIUM]', LOW: '[LOW]' }[severity] || '[INFO]';
   return {
-    text: `${emoji} MANTIS Alert: ${event.threatType || 'THREAT_DETECTED'}`,
+    text: `${prefix} MANTIS Alert: ${event.threatType || 'THREAT_DETECTED'}`,
     severity,
     details: {
       ip: event.actorIp || event.actor?.ip || 'unknown',
