@@ -92,7 +92,7 @@ class MLDetector(BaseDetector):
             confidence = min(max(0.5 - iso_score, 0.3), 0.95)
 
             # Determine threat type from dominant features
-            threat_type = self._classify_threat(row)
+            threat_type = self._heuristic_threat_labeler(row)
             severity = self._severity_from_confidence(confidence)
 
             threats.append(ThreatEvent(
@@ -109,8 +109,15 @@ class MLDetector(BaseDetector):
 
         return threats
 
-    def _classify_threat(self, row: pd.Series) -> str:
-        """Classify threat type from feature values."""
+    def _heuristic_threat_labeler(self, row: pd.Series) -> str:
+        """
+        Heuristically label the threat type from feature values.
+        
+        Note: The underlying anomaly detection is driven by the ML ensemble 
+        (IsolationForest, LOF, etc.), but this function applies a rule-based 
+        heuristic to assign a human-readable threat category based on which 
+        features caused the anomaly score to spike.
+        """
         if row.get('botnet_score', 0) > 3:
             return 'BOTNET'
         if row.get('auth_failure_rate', 0) > 0.5:

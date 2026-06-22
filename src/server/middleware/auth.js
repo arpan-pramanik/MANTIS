@@ -1,6 +1,7 @@
 'use strict';
 
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const config = require('../config');
 const { AuthenticationError, AuthorizationError } = require('../utils/errors');
 const { logger } = require('../utils/logger');
@@ -23,10 +24,16 @@ function authenticate(req, res, next) {
   const apiKey = req.headers['x-api-key'];
 
   // API key auth
-  if (apiKey) {
-    if (apiKey === config.jwt.secret) {
-      req.user = { role: 'admin', authMethod: 'api-key' };
-      return next();
+  if (apiKey && config.apiKey) {
+    try {
+      const providedKey = Buffer.from(apiKey);
+      const expectedKey = Buffer.from(config.apiKey);
+      if (providedKey.length === expectedKey.length && crypto.timingSafeEqual(providedKey, expectedKey)) {
+        req.user = { role: 'admin', authMethod: 'api-key' };
+        return next();
+      }
+    } catch (err) {
+      // Ignore length mismatch or buffer errors, let it fall through to Invalid API key
     }
     return next(new AuthenticationError('Invalid API key'));
   }

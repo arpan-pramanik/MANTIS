@@ -12,6 +12,7 @@ function loadConfig() {
   if (env.MANTIS_PORT) config.port = parseInt(env.MANTIS_PORT, 10);
   if (env.MANTIS_HOST) config.host = env.MANTIS_HOST;
   if (env.MANTIS_ENV) config.environment = env.MANTIS_ENV;
+  if (env.MANTIS_API_KEY) config.apiKey = env.MANTIS_API_KEY;
   if (env.MANTIS_JWT_SECRET) config.jwt.secret = env.MANTIS_JWT_SECRET;
   if (env.MANTIS_JWT_EXPIRES_IN) config.jwt.expiresIn = env.MANTIS_JWT_EXPIRES_IN;
   if (env.MANTIS_REDIS_ENABLED) config.redis.enabled = env.MANTIS_REDIS_ENABLED === 'true';

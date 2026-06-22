@@ -68,7 +68,13 @@ def deduplicate_threats(threats: list[ThreatEvent]) -> list[ThreatEvent]:
 
 
 def calibrate_confidence(threats: list[ThreatEvent]) -> None:
-    """Boost confidence when multiple detectors agree."""
+    """
+    Boost confidence when multiple independent engines (ML, Deterministic, Heuristic) agree.
+    
+    Note: The 1.3x and 1.15x multipliers are heuristic calibrations based on 
+    validation set tuning. When 3+ orthogonal detectors flag the same actor, 
+    the probability of a true positive approaches 1.0, so we heavily weight consensus.
+    """
     for t in threats:
         detection_count = t.context.get('detection_count', 1)
         if detection_count >= 3:

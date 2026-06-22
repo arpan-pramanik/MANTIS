@@ -7,6 +7,7 @@
     "expiresIn": "24h",
     "issuer": "mantis-api-sentinel"
   },
+  "apiKey": "CHANGE_THIS_IN_PRODUCTION_admin_api_key_2024",
   "rateLimit": {
     "global": {
       "windowMs": 60000,

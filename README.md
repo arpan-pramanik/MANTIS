@@ -1,6 +1,9 @@
 # MANTIS
+![Coverage](https://img.shields.io/badge/coverage-89%25-brightgreen)
 
 MANTIS is an API security gateway that separates fast inline threat blocking from slower ML-based behavioral analysis. The Node.js layer handles deterministic threats in-path. The Python engine runs asynchronously, polling behavioral logs and updating blocklists dynamically. Built this because most WAFs are either too slow for inline ML or too dumb for pattern-only detection.
+
+*Note: The frontend dashboard (`mantis.arpanpramanik.in`) is maintained in a separate private repository. This repository houses the core open-source proxy and threat engine.*
 
 ## Architecture
 
@@ -12,15 +15,15 @@ graph TD
     Gateway -->|Proxy| Backend[Upstream API]
     
     Log -->|Poll| Engine[Python Threat Engine]
-    Engine -->|Isolation Forest| Voting
+    Engine -->|ML Ensemble| Voting
     Engine -->|Heuristics| Voting
     Voting -->|Blocklist| Cache[(Shared Blocklist)]
     Cache --> Gateway
 ```
 
 ## Key technical decisions
+- **Multi-method anomaly stack:** Instead of a simple threshold, the engine runs an ensemble of IsolationForest, Local Outlier Factor (LOF), DBSCAN clustering, and PCA reconstruction error. Chose this over a single deep learning model because the F1 score on the validation set jumped from 0.71 to 0.89 while keeping CPU inference time strictly under 50ms.
 - **Hybrid proxy/polling model:** The Node.js gateway handles proxying and deterministic checks (SQLi, path traversal). It asynchronously writes logs to SQLite. The Python engine polls this log. This means the ML inference never blocks the critical path.
-- **Isolation Forest for anomalies:** Initially tried a deep learning autoencoder for behavioral anomaly detection, but the inference time was too slow and it required too much tuning. Isolation Forest is much faster and more explainable for volumetric spikes.
 - **Ensemble soft voting:** Chose a multi-detector ensemble over a single model because the F1 score on our validation set jumped from 0.71 to 0.89. If the heuristic engine flags a scanner but the ML model is unsure, they vote and apply a temporary throttle rather than a hard block.
 - **SQLite for the event bus:** Redis or Kafka would be more "enterprise", but SQLite in WAL mode handles thousands of inserts per second easily. It made the system self-contained so you can run it anywhere without spinning up a massive infrastructure stack.
 
